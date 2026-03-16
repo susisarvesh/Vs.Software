@@ -1,0 +1,424 @@
+/* ════════════════════════════════════════
+   TrustSection — Stats · Timeline · Commitments
+   Single-color: #3b82f6 (blue)
+   ════════════════════════════════════════ */
+
+/* ── Design token ── */
+:root {
+  --trust-blue: #3b82f6;
+  --trust-blue-dim: rgba(59, 130, 246, 0.12);
+  --trust-blue-border: rgba(59, 130, 246, 0.25);
+}
+
+/* ── Section shell ── */
+.trust {
+  padding: 120px 0 100px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Subtle ambient orb ── */
+.gradientOrb {
+  position: absolute;
+  top: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 500px;
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 30%,
+    rgba(59, 130, 246, 0.07) 0%,
+    transparent 70%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+[data-theme="dark"] .gradientOrb {
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 30%,
+    rgba(59, 130, 246, 0.11) 0%,
+    transparent 70%
+  );
+}
+
+/* ── Page-width container ── */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 80px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ════════════════════
+   HEADER
+   ════════════════════ */
+.header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.sectionLabel {
+  font-size: 11px;
+  color: var(--text-muted);
+  letter-spacing: 0.12em;
+}
+
+.sectionTitle {
+  font-size: clamp(30px, 4vw, 50px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: var(--text-primary);
+  line-height: 1.1;
+}
+
+.sectionDesc {
+  font-size: 15px;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  max-width: 560px;
+  margin: 0 auto;
+}
+
+/* ════════════════════
+   STATS GRID
+   ════════════════════ */
+.statsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.statCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 30px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  position: relative;
+  overflow: hidden;
+  transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease;
+}
+
+.statCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 3px;
+  background: var(--trust-blue);
+  border-radius: 3px 0 0 3px;
+  opacity: 0;
+  transition: opacity 0.28s ease;
+}
+
+.statCard:hover {
+  transform: translateY(-4px) translateX(2px);
+  box-shadow: 0 16px 40px rgba(59, 130, 246, 0.1);
+  border-color: var(--trust-blue-border);
+}
+
+.statCard:hover::after {
+  opacity: 1;
+}
+
+.statValue {
+  font-size: clamp(36px, 3.8vw, 50px);
+  font-weight: 400;
+  letter-spacing: -0.04em;
+  line-height: 1;
+  color: var(--text-primary);
+}
+
+.statLabel {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--text-primary);
+  line-height: 1.3;
+}
+
+.statSub {
+  font-size: 12px;
+  color: var(--text-muted);
+  line-height: 1.45;
+}
+
+/* ════════════════════
+   BLOCK LABEL
+   ════════════════════ */
+.blockLabel {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  margin-bottom: 14px;
+}
+
+/* ════════════════════
+   TIMELINE
+   Approach: .timelineWrapper is position:relative with
+   padding-left for the line+gap. The line is absolute at
+   left:0. Each dot is absolute at left:-(dot-half) so it
+   sits perfectly centred ON the line.
+   ════════════════════ */
+
+.timelineBlock {
+  width: 100%;
+}
+
+.timelineHeading {
+  font-size: clamp(20px, 2.6vw, 32px);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  color: var(--text-primary);
+  line-height: 1.25;
+  margin-bottom: 48px;
+  max-width: 560px;
+}
+
+/* The outer wrapper carries the vertical line as a pseudo */
+.timelineWrapper {
+  position: relative;
+  padding-left: 72px;   /* line (3px) + gap (69px) = cards start at 72px */
+}
+
+/* ── The single blue vertical line ── */
+.timelineLine {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  width: 3px;
+  background: var(--trust-blue);
+  border-radius: 3px;
+  transform-origin: top center;
+}
+
+/* ── Each timeline item row ── */
+.timelineItem {
+  position: relative;
+  padding-bottom: 60px;
+}
+
+.timelineItem:last-child {
+  padding-bottom: 0;
+}
+
+/*
+  Dot positioning:
+  line is at left:0 of .timelineWrapper (3px wide)
+  wrapper padding-left:72px → timelineItem left edge is 72px from line
+  dot width:14px → to centre on 3px line:
+    left = -(72) - (14/2) + (3/2) = -72 - 7 + 1.5 ≈ -77.5px → use -78px
+*/
+.timelineDot {
+  position: absolute;
+  left: -78px;
+  top: 16px;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: var(--trust-blue);
+  border: 2.5px solid var(--card-bg);
+  box-shadow: 0 0 0 2.5px var(--trust-blue);
+  z-index: 2;
+  transition: box-shadow 0.25s ease;
+}
+
+.timelineItem:hover .timelineDot {
+  box-shadow: 0 0 0 4px var(--trust-blue-dim);
+}
+
+/* ── Card ── */
+.timelineCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 20px;
+  padding: 36px 36px 32px;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease, transform 0.25s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Single blue LEFT accent bar — professional, like a pull-quote */
+.timelineCard::before {
+  content: '';
+  position: absolute;
+  top: 24px;
+  bottom: 24px;
+  left: 0;
+  width: 3px;
+  background: var(--trust-blue);
+  border-radius: 0 3px 3px 0;
+  opacity: 0;
+  transition: opacity 0.25s ease, top 0.25s ease, bottom 0.25s ease;
+}
+
+.timelineItem:hover .timelineCard {
+  border-color: var(--trust-blue-border);
+  box-shadow: 0 10px 36px rgba(59, 130, 246, 0.09);
+  transform: translateX(6px);
+}
+
+.timelineItem:hover .timelineCard::before {
+  opacity: 1;
+  top: 16px;
+  bottom: 16px;
+}
+
+.timelineCardTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+
+.timelineStep {
+  font-size: 11px;
+  letter-spacing: 0.14em;
+  color: var(--trust-blue);
+  font-weight: 600;
+}
+
+.timelineDuration {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  padding: 4px 14px;
+}
+
+.timelineTitle {
+  font-size: 22px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  line-height: 1.25;
+  margin-bottom: 12px;
+}
+
+.timelineDesc {
+  font-size: 15.5px;
+  color: var(--text-secondary);
+  line-height: 1.72;
+  margin-bottom: 20px;
+}
+
+.timelineTags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.timelineTag {
+  font-size: 11px;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  padding: 4px 12px;
+  white-space: nowrap;
+  letter-spacing: 0.06em;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.timelineItem:hover .timelineTag {
+  border-color: var(--trust-blue-border);
+  color: var(--text-primary);
+}
+
+/* ════════════════════
+   COMMITMENTS
+   ════════════════════ */
+.promisesBlock {
+  width: 100%;
+}
+
+.promisesGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.promiseCard {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 26px 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.promiseCard:hover {
+  transform: translateY(-3px);
+  border-color: var(--trust-blue-border);
+  box-shadow: 0 8px 24px rgba(59, 130, 246, 0.07);
+}
+
+/* Icon wrapper — small, clean, monochrome */
+.promiseIconWrap {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: var(--trust-blue-dim);
+  border: 1px solid var(--trust-blue-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--trust-blue);
+  flex-shrink: 0;
+}
+
+.promiseTitle {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.promiseDesc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ════════════════════
+   RESPONSIVE
+   ════════════════════ */
+@media (max-width: 1024px) {
+  .statsGrid   { grid-template-columns: repeat(2, 1fr); }
+  .promisesGrid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 768px) {
+  .trust { padding: 80px 0 60px; }
+  .container { gap: 56px; padding: 0 20px; }
+  .statsGrid { grid-template-columns: repeat(2, 1fr); }
+  .promisesGrid { grid-template-columns: 1fr 1fr; }
+  .timelineWrapper { padding-left: 48px; }
+  .timelineDot { left: -53px; width: 12px; height: 12px; top: 18px; }
+  .timelineCard { padding: 24px 20px; }
+  .timelineTitle { font-size: 18px; }
+  .timelineDesc { font-size: 14px; }
+}
+
+@media (max-width: 480px) {
+  .statsGrid { grid-template-columns: 1fr 1fr; }
+  .promisesGrid { grid-template-columns: 1fr; }
+  .timelineDuration { display: none; }
+}

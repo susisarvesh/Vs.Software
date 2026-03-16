@@ -1,0 +1,261 @@
+.footer {
+  padding: 120px 32px 80px;
+  background: #0E0E16;
+  position: relative;
+  overflow: hidden;
+  margin-bottom: 0 !important;
+}
+
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* Top glow */
+.footer::before {
+  content: '';
+  position: absolute;
+  top: -180px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse 60% 55% at 50% 30%,
+    rgba(124, 58, 237, 0.28) 0%,
+    rgba(59, 130, 246, 0.14) 40%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Bottom teal glow */
+.footer::after {
+  content: '';
+  position: absolute;
+  bottom: -100px;
+  right: -100px;
+  width: 500px;
+  height: 350px;
+  background: radial-gradient(
+    ellipse 50% 50% at 65% 65%,
+    rgba(16, 185, 129, 0.13) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 56px;
+}
+
+.heading {
+  font-size: clamp(30px, 5vw, 56px);
+  font-weight: 400;
+  letter-spacing: -0.03em;
+  line-height: 1.12;
+  color: #fff;
+  text-align: center;
+}
+
+/* CTA row */
+.ctaRow {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.arrowGroup {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+
+.arrowItem {
+  color: rgba(255, 255, 255, 0.25);
+  display: flex;
+  align-items: center;
+  opacity: 0;
+}
+
+.ctaButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 20px 8px 8px;
+  background: #fff;
+  color: #181824;
+  border-radius: 100px;
+  text-decoration: none;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+  font-family: var(--font-sans);
+}
+
+.ctaButton:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(255, 255, 255, 0.18);
+}
+
+.ctaAvatar {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.ctaAvatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-right: 4px;
+}
+
+.ctaMain {
+  font-size: 14px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #181824;
+}
+
+.ctaSub {
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.6;
+  line-height: 1.25;
+  color: #181824;
+}
+
+/* Bottom bar */
+.bottomBar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  position: relative;
+  margin-top: 60px;
+}
+
+.topLinks {
+  display: flex;
+  gap: 40px;
+  z-index: 2;
+}
+
+.footerBrandRow {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 32px;
+  border-top: 1px solid rgba(255, 255, 255, 0.07);
+  flex-wrap: wrap;
+  gap: 16px;
+  z-index: 2;
+}
+
+.giantTextContainer {
+  position: relative;
+  width: 100%;
+  text-align: center;
+  pointer-events: none;
+  z-index: 0;
+  margin: -20px 0;
+}
+
+.giantText {
+  font-size: clamp(100px, 20vw, 320px);
+  font-weight: 700;
+  color: #fff;
+  opacity: 0.025;
+  letter-spacing: -0.04em;
+  white-space: nowrap;
+  line-height: 0.8;
+}
+
+
+.footerLogo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.footerLogo img {
+  width: 40px;
+  height: 40px;
+}
+
+@media (max-width: 480px) {
+  .footerLogo img {
+    width: 32px;
+    height: 32px;
+  }
+}
+
+.footerBrand {
+  font-size: 15px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.8);
+  letter-spacing: -0.01em;
+}
+
+.footerCopy {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.09em;
+}
+
+.footerLinks {
+  display: flex;
+  gap: 16px;
+}
+
+.footerLink {
+  font-size: 12px;
+  color: rgba(255, 255, 255, 0.35);
+  transition: color 0.2s ease;
+  text-decoration: none;
+}
+
+.footerLink:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 80px 24px 40px;
+  }
+
+  .arrowGroup {
+    display: none;
+  }
+
+  .bottomBar {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+}

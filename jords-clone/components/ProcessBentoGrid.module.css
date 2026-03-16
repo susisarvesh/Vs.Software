@@ -1,0 +1,254 @@
+.process {
+  padding: 120px 32px;
+  background: #0E0E16;
+  position: relative;
+  overflow: hidden;
+}
+
+[data-theme="dark"] .process {
+  background: #0E0E16;
+}
+
+.gridBg {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 255, 255, 0.025) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.025) 1px, transparent 1px);
+  background-size: 60px 60px;
+  pointer-events: none;
+}
+
+/* Center gradient glow – inspired by the reference image */
+.process::before {
+  content: '';
+  position: absolute;
+  top: -60px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 900px;
+  height: 600px;
+  background: radial-gradient(
+    ellipse 55% 50% at 50% 35%,
+    rgba(124, 58, 237, 0.22) 0%,
+    rgba(59, 130, 246, 0.1) 40%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.process::after {
+  content: '';
+  position: absolute;
+  bottom: -80px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 700px;
+  height: 400px;
+  background: radial-gradient(
+    ellipse 50% 45% at 50% 60%,
+    rgba(16, 185, 129, 0.1) 0%,
+    transparent 65%
+  );
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  margin-bottom: 56px;
+}
+
+.label {
+  color: rgba(255, 255, 255, 0.28);
+  font-size: 11px;
+}
+
+.title {
+  font-size: clamp(32px, 4.5vw, 52px);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  color: #fff;
+  line-height: 1.12;
+}
+
+/* ── 2-row 3-col layout for 6 cards ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+
+.card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.card:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.phaseId {
+  font-size: 11px;
+  color: rgba(255, 255, 255, 0.22);
+  letter-spacing: 0.1em;
+}
+
+.icon {
+  font-size: 18px;
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.cardTitle {
+  font-size: 22px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+}
+
+.cardDesc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.65;
+  flex: 1;
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: auto;
+}
+
+.tag {
+  font-size: 10px;
+  color: rgba(255, 255, 255, 0.28);
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 100px;
+  padding: 4px 10px;
+  letter-spacing: 0.07em;
+  white-space: nowrap;
+}
+
+/* Featured "not an agency" card */
+.featured {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  padding: 28px 32px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  transition: border-color 0.3s ease;
+}
+
+.featured:hover {
+  border-color: rgba(255, 255, 255, 0.14);
+}
+
+.featuredLogo {
+  flex-shrink: 0;
+}
+
+.featuredLogo img {
+  width: 52px;
+  height: 52px;
+}
+
+@media (max-width: 900px) {
+  .featuredLogo img {
+    width: 40px;
+    height: 40px;
+  }
+}
+
+.featuredContent {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.featuredTitle {
+  font-size: 22px;
+  font-weight: 500;
+  color: #fff;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+}
+
+.featuredDivider {
+  width: 1px;
+  height: 40px;
+  background: rgba(255, 255, 255, 0.1);
+  flex-shrink: 0;
+}
+
+.featuredDesc {
+  font-size: 14px;
+  color: rgba(255, 255, 255, 0.38);
+  line-height: 1.65;
+  max-width: 480px;
+}
+
+@media (max-width: 900px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .featured {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 32px 24px;
+    gap: 20px;
+  }
+  .featuredContent {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+  }
+  .featuredDivider {
+    width: 40px;
+    height: 1px;
+  }
+  .featuredTitle {
+    white-space: normal;
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 768px) {
+  .process {
+    padding: 100px 20px 60px;
+  }
+  .title {
+    font-size: 30px;
+  }
+}
