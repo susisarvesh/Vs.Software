@@ -5,8 +5,6 @@
 
 /* ── Design token ── */
 :root {
-  --trust-blue: #3b82f6;
-  --trust-blue-dim: rgba(59, 130, 246, 0.12);
   --trust-blue-border: rgba(59, 130, 246, 0.25);
 }
 
