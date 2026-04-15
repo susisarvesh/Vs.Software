@@ -77,10 +77,10 @@ export default function ConsultationModal({ isOpen, onClose }: Props) {
     };
 
     try {
-      const serviceId = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || '';
-      const templateId = process.env.NEXT_PUBLIC_EMAILJS_TEMPLATE_ID || '';
-      const autoReplyTemplateId = process.env.NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID || '';
-      const publicKey = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || '';
+      const serviceId = "service_kftq76c";
+      const templateId = "template_tpur2s9";
+      const autoReplyTemplateId = "template_pq76hob";
+      const publicKey = "oi7EJD5xnCr1cUTRC";
 
       if (!serviceId || !templateId || !publicKey) {
         console.error('EmailJS credentials missing. Check your .env.local file.');
@@ -98,10 +98,10 @@ export default function ConsultationModal({ isOpen, onClose }: Props) {
       );
 
       // 2. Send auto-reply to user (if template ID is configured)
-      if (autoReplyTemplateId && autoReplyTemplateId !== 'template_auto_reply_placeholder') {
-        try {
-          await emailjs.send(
-            serviceId,
+      if (autoReplyTemplateId) {
+          try {
+            await emailjs.send(
+              serviceId,
             autoReplyTemplateId,
             {
               to_name: name,
