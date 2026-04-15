@@ -1,6 +1,7 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  // config options here
+  output: 'export',
+  basePath: '/jords-clone', // 👈 your repo name
 };
 
 module.exports = nextConfig;
